@@ -1,0 +1,7 @@
+{
+  "globalDependencies": {
+    "github-electron": "registry:dt/github-electron#1.2.7+20160724065513",
+    "node": "registry:dt/node#6.0.0+20160720070758",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160524142046"
+  }
+}
