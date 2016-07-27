@@ -4,6 +4,14 @@ import {app, BrowserWindow} from "electron";
 // be closed automatically when the JavaScript object is garbage collected.
 export let win: Electron.BrowserWindow;
 
+const ipcMain = {
+  send(channel: string, ...args: any[]): void {
+    const json = JSON.stringify({ channel: channel, args: args });
+    win.webContents.executeJavaScript(
+      `window.dispatchEvent(new CustomEvent('ipc', { detail: { json: '${json}' }}));`);
+  }
+};
+
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
@@ -27,7 +35,7 @@ function createWindow() {
     win = null;
   });
 
-  win.webContents.executeJavaScript("window.dispatchEvent(new Event('ipc'));");
+  ipcMain.send('ipc10', [10]);
 }
 
 // This method will be called when Electron has finished
